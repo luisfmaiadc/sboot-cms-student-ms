@@ -4,13 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.5</version>
+		<groupId>com.portfolio.luisfmdc</groupId>
+		<artifactId>pom-base-course-management-system</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 		<relativePath/>
 	</parent>
 
-	<groupId>com.portfolio.luisfmdc</groupId>
 	<artifactId>sboot-cms-student-ms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>sboot-cms-student-ms</name>
@@ -57,6 +56,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-database-postgresql</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
@@ -67,6 +71,12 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.36</version>
 			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			<version>4.2.0</version>
 		</dependency>
 
 		<dependency>
@@ -86,7 +96,6 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
-							<version>1.18.36</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
