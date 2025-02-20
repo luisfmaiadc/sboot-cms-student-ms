@@ -1,5 +1,6 @@
 package com.portfolio.luisfmdc.sboot_cms_student_ms.service;
 
+import com.portfolio.luisfmdc.sboot_cms_student_ms.client.CursoClient;
 import com.portfolio.luisfmdc.sboot_cms_student_ms.domain.aluno.Aluno;
 import com.portfolio.luisfmdc.sboot_cms_student_ms.domain.matricula.Matricula;
 import com.portfolio.luisfmdc.sboot_cms_student_ms.repository.AlunoRepository;
@@ -20,8 +21,17 @@ public class MatriculaService {
     @Autowired
     private AlunoRepository alunoRepository;
 
+    @Autowired
+    private CursoClient curso;
+
     public ResponseEntity cadastrarMatricula(Integer idAluno, Integer idCurso,
                                              UriComponentsBuilder uriComponentsBuilder) {
+        boolean cursoValido = validarCurso(idCurso);
+
+        if (!cursoValido) {
+            throw new RuntimeException("Curso inválido!");
+        }
+
         Aluno aluno = alunoRepository.getReferenceById(idAluno);
         Matricula matricula = new Matricula(aluno, idCurso);
         matriculaRepository.save(matricula);
@@ -35,5 +45,10 @@ public class MatriculaService {
         matricula.setAtivo(Boolean.FALSE);
         matriculaRepository.save(matricula);
         return ResponseEntity.noContent().build();
+    }
+
+    private boolean validarCurso(Integer idCurso) {
+        ResponseEntity<Void> response = curso.validarCurso(idCurso);
+        return response.getStatusCode().is2xxSuccessful();
     }
 }
